@@ -57,7 +57,7 @@ kramdown:
 
 # 评论系统
 # Disqus（https://disqus.com/）
-disqus_username: zhao_yang
+disqus_username: zhaoyangorg
 
 # Gitalk
 gitalk:
