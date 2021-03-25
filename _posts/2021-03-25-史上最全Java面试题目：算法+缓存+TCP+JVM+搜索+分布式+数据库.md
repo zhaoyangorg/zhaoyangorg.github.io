@@ -1,30 +1,30 @@
-```
+---
 layout:     post
-title:      史上最全Java面试266题：算法+缓存+TCP+JVM+搜索+分布式+数据库
-subtitle:   史上最全Java面试266题：算法+缓存+TCP+JVM+搜索+分布式+数据库
+title:      史上最全Java面试题目：算法+缓存+TCP+JVM+搜索+分布式+数据库
+subtitle:   面试准备
 date:       2021-03-25
 author:     zhaoyang
 header-img: img/starry-sky.jpg
 catalog: true
 tags:
     - interview
-```
+---
 
 
 ## 前言
 
-题目原文[史上最全Java面试266题：算法+缓存+TCP+JVM+搜索+分布式+数据库](http://k6k4.com/blog/show/aaazl3yz31536803138663)
+原文[史上最全Java面试题目：算法+缓存+TCP+JVM+搜索+分布式+数据库](http://k6k4.com/blog/show/aaazl3yz31536803138663)
 
 ## 正文
 
 **JAVA基础**
 ```
-1. JAVA中的几种基本数据类型是什么，各自占用多少字节。
-2. String类能被继承吗，为什么。
-3. String，Stringbuffer，StringBuilder的区别。
-4. ArrayList和LinkedList有什么区别。
-5. 讲讲类的实例化顺序，比如父类静态数据，构造函数，字段，子类静态数据，构造函数，字段，当new的时候，他们的执行顺序。
-6. 用过哪些Map类，都有什么区别，HashMap是线程安全的吗,并发下使用的Map是什么，他们内部原理分别是什么，比如存储方式，hashcode，扩容，默认容量等。
+1.JAVA中的几种基本数据类型是什么，各自占用多少字节。
+2.String类能被继承吗，为什么。
+3.String，Stringbuffer，StringBuilder的区别。
+4.ArrayList和LinkedList有什么区别。
+5.讲讲类的实例化顺序，比如父类静态数据，构造函数，字段，子类静态数据，构造函数，字段，当new的时候，他们的执行顺序。
+6.用过哪些Map类，都有什么区别，HashMap是线程安全的吗,并发下使用的Map是什么，他们内部原理分别是什么，比如存储方式，hashcode，扩容，默认容量等。
 7.JAVA8的ConcurrentHashMap为什么放弃了分段锁，有什么问题吗，如果你来设计，你如何设计。
 8.有没有有顺序的Map实现类，如果有，他们是怎么保证有序的。
 9.抽象类和接口的区别，类可以继承多个类么，接口可以继承多个接口么,类可以实现多个接口么。
@@ -220,9 +220,9 @@ tags:
 ```
 **数据库知识**
 ```
-1. 数据库隔离级别有哪些，各自的含义是什么，MYSQL默认的隔离级别是是什么。
-2. 什么是幻读。
-3. MYSQL有哪些存储引擎，各自优缺点。
+1.数据库隔离级别有哪些，各自的含义是什么，MYSQL默认的隔离级别是是什么。
+2.什么是幻读。
+3.MYSQL有哪些存储引擎，各自优缺点。
 4.高并发下，如何做到安全的修改同一行数据。
 5.乐观锁和悲观锁是什么，INNODB的标准行级锁有哪2种，解释其含义。
 6.SQL优化的一般步骤是什么，怎么看执行计划，如何理解其中各个字段的含义。
