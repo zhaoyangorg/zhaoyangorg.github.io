@@ -18,9 +18,7 @@ tags:
 ## 正文
 
 **JAVA基础**
----
 1.JAVA中的几种基本数据类型是什么，各自占用多少字节。
-
 1字节=8bit（位）
 
 | 基本类型 | 字节 | 
@@ -35,6 +33,22 @@ tags:
 | long | 64bit 8字节 |
 
 2.String类能被继承吗，为什么。
+不能，因为String被final修饰，被final修饰的类不能被继承
+
+扩展：
+- String 类
+public final class String implements java.io.Serializable, Comparable<String>, CharSequence 
+- final 关键字   
+   - 对于一个 final 变量，如果是基本数据类型的变量，则其数值一旦在初始化之后便不能更改；如果是引用类型的变量，则在对其初始化之后便不能再让其指向另一个对象。
+   - 当用 final 修饰一个类时，表明这个类不能被继承。final 类中的所有成员方法都会被隐式地指定为 final 方法。
+   - 使用 final 方法的原因有两个。第一个原因是把方法锁定，以防任何继承类修改它的含义；第二个原因是效率。在早期的 Java 实现版本中，会将 final 方法转为内嵌调用。但是如果方法过于庞大，可能看不到内嵌调用带来的任何性能提升（现在的 Java 版本已经不需要使用 final 方法进行这些优化了）。类中所有的 private 方法都隐式地指定为 final。
+- String s = new String(“xyz”);  //创建了几个对象
+
+- Java中的String为什么是不可变的
+
+- StringBuffer, StringBuilder
+    - StringBuffer线程安全，StringBuilder线程不安全，但是效率高
+
 3.String，Stringbuffer，StringBuilder的区别。
 4.ArrayList和LinkedList有什么区别。
 5.讲讲类的实例化顺序，比如父类静态数据，构造函数，字段，子类静态数据，构造函数，字段，当new的时候，他们的执行顺序。
