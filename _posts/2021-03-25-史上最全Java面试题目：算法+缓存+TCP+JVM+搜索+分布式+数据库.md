@@ -20,6 +20,20 @@ tags:
 **JAVA基础**
 ```
 1.JAVA中的几种基本数据类型是什么，各自占用多少字节。
+
+1字节=8bit（位）
+
+基本类型|字节
+---|:--:
+boolean|1bit 不到一个字节
+byte|8bit 1字节
+short|16bit 2字节
+char|16bit 2字节
+int|32bit 4字节
+float|32bit 4字节
+double|64bit 8字节
+long|64bit 8字节
+
 2.String类能被继承吗，为什么。
 3.String，Stringbuffer，StringBuilder的区别。
 4.ArrayList和LinkedList有什么区别。
