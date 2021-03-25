@@ -19,6 +19,7 @@ tags:
 
 **JAVA基础**
 1. JAVA中的几种基本数据类型是什么，各自占用多少字节。
+
 1字节=8bit（位）
 
 | 基本类型 | 字节 | 
@@ -33,6 +34,7 @@ tags:
 | long | 64bit 8字节 |
 
 2. String类能被继承吗，为什么。
+
 不能，因为String被final修饰，被final修饰的类不能被继承
 
 扩展：
@@ -49,17 +51,28 @@ public final class String implements java.io.Serializable, Comparable<String>, C
 - StringBuffer, StringBuilder
     - StringBuffer线程安全，StringBuilder线程不安全，但是效率高
 
-3.String，Stringbuffer，StringBuilder的区别。
-4.ArrayList和LinkedList有什么区别。
-5.讲讲类的实例化顺序，比如父类静态数据，构造函数，字段，子类静态数据，构造函数，字段，当new的时候，他们的执行顺序。
-6.用过哪些Map类，都有什么区别，HashMap是线程安全的吗,并发下使用的Map是什么，他们内部原理分别是什么，比如存储方式，hashcode，扩容，默认容量等。
-7.JAVA8的ConcurrentHashMap为什么放弃了分段锁，有什么问题吗，如果你来设计，你如何设计。
-8.有没有有顺序的Map实现类，如果有，他们是怎么保证有序的。
-9.抽象类和接口的区别，类可以继承多个类么，接口可以继承多个接口么,类可以实现多个接口么。
-10.继承和聚合的区别在哪。
-11.IO模型有哪些，讲讲你理解的nio ，他和bio，aio的区别是啥，谈谈reactor模型。
-12.反射的原理，反射创建类实例的三种方式是什么。
-13.反射中，Class.forName和ClassLoader区别 。
+3. String，Stringbuffer，StringBuilder的区别。
+
+4. ArrayList和LinkedList有什么区别。
+
+5. 讲讲类的实例化顺序，比如父类静态数据，构造函数，字段，子类静态数据，构造函数，字段，当new的时候，他们的执行顺序。
+
+6. 用过哪些Map类，都有什么区别，HashMap是线程安全的吗,并发下使用的Map是什么，他们内部原理分别是什么，比如存储方式，hashcode，扩容，默认容量等。
+
+7. JAVA8的ConcurrentHashMap为什么放弃了分段锁，有什么问题吗，如果你来设计，你如何设计。
+
+8. 有没有有顺序的Map实现类，如果有，他们是怎么保证有序的。
+
+9. 抽象类和接口的区别，类可以继承多个类么，接口可以继承多个接口么,类可以实现多个接口么。
+
+10. 继承和聚合的区别在哪。
+
+11. IO模型有哪些，讲讲你理解的nio ，他和bio，aio的区别是啥，谈谈reactor模型。
+
+12. 反射的原理，反射创建类实例的三种方式是什么。
+
+13. 反射中，Class.forName和ClassLoader区别。
+
 14.描述动态代理的几种实现方式，分别说出相应的优缺点。
 15.动态代理与cglib实现的区别。
 16.为什么CGlib方式可以对接口实现代理。
