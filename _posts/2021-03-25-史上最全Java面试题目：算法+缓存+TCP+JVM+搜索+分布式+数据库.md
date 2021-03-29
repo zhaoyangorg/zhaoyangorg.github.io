@@ -47,51 +47,106 @@ public final class String implements java.io.Serializable, Comparable<String>, C
    - 使用 final 方法的原因有两个。第一个原因是把方法锁定，以防任何继承类修改它的含义；第二个原因是效率。在早期的 Java 实现版本中，会将 final 方法转为内嵌调用。但是如果方法过于庞大，可能看不到内嵌调用带来的任何性能提升（现在的 Java 版本已经不需要使用 final 方法进行这些优化了）。类中所有的 private 方法都隐式地指定为 final。
 - String s = new String(“xyz”);  //创建了几个对象
 
+String s=new String("xyz")究竟创建String Object分为两种情况 、
+1.如果String常理池中，已经创建"xyz"，则不会继续创建，此时只创建了一个对象new String("xyz")
+
+2.如果String常理池中，没有创建"xyz"，则会创建两个对象，一个对象的值是"xyz"，一个对象new String("xyz")。
+
 - Java中的String为什么是不可变的
 
 - StringBuffer, StringBuilder
-    - StringBuffer线程安全，StringBuilder线程不安全，但是效率高
+    - String、StringBuffer线程安全(使用了synchronized)，StringBuilder线程不安全，但是效率高
 
-3. String，Stringbuffer，StringBuilder的区别。
+3. ArrayList和LinkedList有什么区别。
 
-4. ArrayList和LinkedList有什么区别。
+    - ArrayList
+    底层实现是动态数组；扩容过程是：默认初始长度是10，并且每次先扩大1.5倍，在跟需要的数据长度做比较，如果不够的话，以数据需要的长度为准，然后在检查期望容量是否越界，越界的话，以最大容量为准；ArrayList 还实现了 Cloneable 接口，这表明 ArrayList 是支持拷贝的；ArrayList 还实现了 Serializable 接口，标记“实现了这个接口的类支持序列化”，但是ArrayList 中的关键字段elementData 使用了 transient 关键字修饰，这个关键字的作用是，让它修饰的字段不被序列化。为什么要这样，因为序列化的时候，如果把整个数组都序列化的话，会将没有值的字段一起序列化。当存储的元素数量非常非常多的时候，闲置的空间就非常非常大，序列化耗费的时间就会非常非常多。所以arraylist内部提供了两个私有方法 writeObject 和 readObject 来完成序列化和反序列化。它使用了 ArrayList 的实际大小 size 而不是数组的长度（elementData.length）来作为元素的上限进行序列化。
+    - LinkedList
+    底层实现是双向链表；LinkedList 还实现了 Cloneable 接口，这表明 LinkedList 是支持拷贝的。LinkedList 还实现了 Serializable 接口，这表明 LinkedList 是支持序列化的，但是LinkedList 中的关键字段 size、first、last 都使用了 transient 关键字修饰，LinkedList 在序列化的时候只保留了元素的内容 item，并没有保留元素的前后引用。这样就节省了不少内存空间，当使用反序列化readObject()方法的时候，它可以把链表重新链接起来，这样就恢复了链表序列化之前的顺序
 
-5. 讲讲类的实例化顺序，比如父类静态数据，构造函数，字段，子类静态数据，构造函数，字段，当new的时候，他们的执行顺序。
+4. 讲讲类的实例化顺序，比如父类静态数据，构造函数，字段，子类静态数据，构造函数，字段，当new的时候，他们的执行顺序。
 
-6. 用过哪些Map类，都有什么区别，HashMap是线程安全的吗,并发下使用的Map是什么，他们内部原理分别是什么，比如存储方式，hashcode，扩容，默认容量等。
+    - 父类静态代码块、静态变量按照代码的先后顺序执行
+    - 子类静态代码块、静态变量按照代码的先后顺序执行
+    - 父类非静态代码块、非静态变量按照代码先后顺序执行、构造函数
+    - 子类非静态代码块、非静态变量按照代码先后顺序执行、构造函数
 
-7. JAVA8的ConcurrentHashMap为什么放弃了分段锁，有什么问题吗，如果你来设计，你如何设计。
+    - 静态代码块、静态变量只会执行一次
 
-8. 有没有有顺序的Map实现类，如果有，他们是怎么保证有序的。
+5. 用过哪些Map类，都有什么区别，HashMap是线程安全的吗,并发下使用的Map是什么，他们内部原理分别是什么，比如存储方式，hashcode，扩容，默认容量等。
+    
+    - Map类
+    HashMap、LinkedHashMap、TreeMap、HashTable、ConcurrentHashMap
+    - HashMap线程不安全、HashTable线程安全（Synchronized）
+    - 并发下使用ConcurrentHashMap
+    - HashMap底层使用数组+链表+红黑树 （当链表长度超过8的时候，转为红黑树）
+    - HashMap 初始长度位16，当数组中有数据的个数超过总数的0.75时，扩容为2n
+    - HashMap的并发问题，在扩容rehash中容易导致死锁
 
-9. 抽象类和接口的区别，类可以继承多个类么，接口可以继承多个接口么,类可以实现多个接口么。
+6. JAVA8的ConcurrentHashMap为什么放弃了分段锁，有什么问题吗，如果你来设计，你如何设计。
 
-10. 继承和聚合的区别在哪。
+    使用节点
 
-11. IO模型有哪些，讲讲你理解的nio ，他和bio，aio的区别是啥，谈谈reactor模型。
+7. 有没有有顺序的Map实现类，如果有，他们是怎么保证有序的。
 
-12. 反射的原理，反射创建类实例的三种方式是什么。
+    - LinkedHashMap（链表） 和 TreeMap（树）
 
-13. 反射中，Class.forName和ClassLoader区别。
+8. 抽象类和接口的区别，类可以继承多个类么，接口可以继承多个接口么,类可以实现多个接口么。
 
-14.描述动态代理的几种实现方式，分别说出相应的优缺点。
-15.动态代理与cglib实现的区别。
-16.为什么CGlib方式可以对接口实现代理。
-17.final的用途。
-18.写出三种单例模式实现 。
-19.如何在父类中为子类自动完成所有的hashcode和equals实现？这么做有何优劣。
-20.请结合OO设计理念，谈谈访问修饰符public、private、protected、default在应用设计中的作用。
-21.深拷贝和浅拷贝区别。
-22.数组和链表数据结构描述，各自的时间复杂度。
-23.error和exception的区别，CheckedException，RuntimeException的区别。
-24.请列出5个运行时异常。
-25.在自己的代码中，如果创建一个java.lang.String类，这个类是否可以被类加载器加载？为什么。
-26.说一说你对java.lang.Object对象中hashCode和equals方法的理解。在什么场景下需要重新实现这两个方法。
-27.在jdk1.5中，引入了泛型，泛型的存在是用来解决什么问题。
-28.这样的a.hashcode() 有什么用，与a.equals(b)有什么关系。
-29.有没有可能2个不相等的对象有相同的hashcode。
-30.Java中的HashSet内部是如何工作的。
-31.什么是序列化，怎么序列化，为什么序列化，反序列化会遇到什么问题，如何解决。
+    - 单继承多实现
+
+9. IO模型有哪些，讲讲你理解的nio ，他和bio，aio的区别是啥，谈谈reactor模型。
+    
+    - nio ：非阻塞同步io
+    - bio：阻塞同步io
+    - aio：异步非阻塞io
+
+
+11. 反射的原理，反射创建类实例的三种方式是什么。
+
+    - Class.forName(类路径)
+    - Object.class
+    - new Object().getClass()
+
+12. 反射中，Class.forName和ClassLoader区别。
+
+    - Class.forName:加载+拼接
+    - ClassLoader加载
+
+13. 描述动态代理的几种实现方式，分别说出相应的优缺点。
+14. 动态代理与cglib实现的区别。
+15. 为什么CGlib方式可以对接口实现代理。
+16. final的用途。
+17. 写出三种单例模式实现 。
+18. 如何在父类中为子类自动完成所有的hashcode和equals实现？这么做有何优劣。
+19. 请结合OO设计理念，谈谈访问修饰符public、private、protected、default在应用设计中的作用。
+20. 深拷贝和浅拷贝区别。
+21. 数组和链表数据结构描述，各自的时间复杂度。
+22. error和exception的区别，CheckedException，RuntimeException的区别。
+23. 请列出5个运行时异常。
+
+    - ClassCastException（类转换异常）
+    - NullPointException
+    - IndexOutOfBoundsExcepiton
+    - ArrayStoreException
+    - IOException
+    
+24. 在自己的代码中，如果创建一个java.lang.String类，这个类是否可以被类加载器加载？为什么。
+25. 说一说你对java.lang.Object对象中hashCode和equals方法的理解。在什么场景下需要重新实现这两个方法。
+26. 在jdk1.5中，引入了泛型，泛型的存在是用来解决什么问题。
+27. 这样的a.hashcode() 有什么用，与a.equals(b)有什么关系。
+28. 有没有可能2个不相等的对象有相同的hashcode。
+
+    - 可能
+
+29. Java中的HashSet内部是如何工作的。
+
+    - set是无序的、唯一的，底层使用hashMap的key实现
+
+30. 什么是序列化，怎么序列化，为什么序列化，反序列化会遇到什么问题，如何解决。
+
+
+
 ---
 **JVM知识**
 ```
