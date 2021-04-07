@@ -40,20 +40,22 @@ tags:
 
 扩展：
 - String 类
+
 public final class String implements java.io.Serializable, Comparable<String>, CharSequence 
+
 - final 关键字   
    - 对于一个 final 变量，如果是基本数据类型的变量，则其数值一旦在初始化之后便不能更改；如果是引用类型的变量，则在对其初始化之后便不能再让其指向另一个对象。
    - 当用 final 修饰一个类时，表明这个类不能被继承。final 类中的所有成员方法都会被隐式地指定为 final 方法。
    - 使用 final 方法的原因有两个。第一个原因是把方法锁定，以防任何继承类修改它的含义；第二个原因是效率。在早期的 Java 实现版本中，会将 final 方法转为内嵌调用。但是如果方法过于庞大，可能看不到内嵌调用带来的任何性能提升（现在的 Java 版本已经不需要使用 final 方法进行这些优化了）。类中所有的 private 方法都隐式地指定为 final。
 - String s = new String(“xyz”);  //创建了几个对象
 
-String s=new String("xyz")究竟创建String Object分为两种情况 、
-1.如果String常理池中，已经创建"xyz"，则不会继续创建，此时只创建了一个对象new String("xyz")
+String s=new String("xyz")究竟创建String Object分为两种情况 
 
-2.如果String常理池中，没有创建"xyz"，则会创建两个对象，一个对象的值是"xyz"，一个对象new String("xyz")。
+如果String常理池中，已经创建"xyz"，则不会继续创建，此时只创建了一个对象new String("xyz")
 
+如果String常理池中，没有创建"xyz"，则会创建两个对象，一个对象的值是"xyz"，一个对象new String("xyz")。
 - Java中的String为什么是不可变的
-
+    - 因为使用final关键字
 - StringBuffer, StringBuilder
     - String、StringBuffer线程安全(使用了synchronized)，StringBuilder线程不安全，但是效率高
 
@@ -201,7 +203,6 @@ String s=new String("xyz")究竟创建String Object分为两种情况 、
     - 检查异常：程序编写时需要try catch住的异常
     - 运行时异常：程序运行时出现的异常
 
-
 23. 请列出5个运行时异常。
 
     - ClassCastException（类转换异常）
@@ -213,6 +214,7 @@ String s=new String("xyz")究竟创建String Object分为两种情况 、
     - 全局异常处理：@ControllerAdvice
     
 24. 在自己的代码中，如果创建一个java.lang.String类，这个类是否可以被类加载器加载？为什么。
+    - 
 25. 说一说你对java.lang.Object对象中hashCode和equals方法的理解。在什么场景下需要重新实现这两个方法。
 26. 在jdk1.5中，引入了泛型，泛型的存在是用来解决什么问题。
     - 解决强制类型转换
