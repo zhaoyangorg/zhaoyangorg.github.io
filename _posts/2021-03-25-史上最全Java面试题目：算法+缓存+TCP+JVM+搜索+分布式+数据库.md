@@ -34,6 +34,7 @@ tags:
 | double | 64bit 8字节 |
 | long | 64bit 8字节 |
 
+
 2. String类能被继承吗，为什么。
 
 不能，因为String被final修饰，被final修饰的类不能被继承
@@ -104,33 +105,32 @@ String s=new String("xyz")究竟创建String Object分为两种情况
     - aio：异步非阻塞io
 
 
-11. 反射的原理，反射创建类实例的三种方式是什么。
+10. 反射的原理，反射创建类实例的三种方式是什么。
 
     - Class.forName(类路径)
     - Object.class
     - new Object().getClass()
 
-12. 反射中，Class.forName和ClassLoader区别。
+11. 反射中，Class.forName和ClassLoader区别。
 
     - Class.forName:加载+拼接
     - ClassLoader加载
 
-13. 描述动态代理的几种实现方式，分别说出相应的优缺点。
-14. 动态代理与cglib实现的区别。
+12. 动态代理与cglib实现的区别。
     - JDK动态代理：利用拦截器(拦截器必须实现InvocationHanlder)加上反射机制生成一个实现代理接口的匿名类，在调用具体方法前调用InvokeHandler来处理。
     - 利用ASM开源包，对代理对象类的class文件加载进来，通过修改其字节码生成子类来处理，CGLib原理是动态生成被代理类的子类。
     - 何时使用JDK还是CGLIB？
         - 如果目标对象实现了接口，默认情况下会采用JDK的动态代理实现AOP
         - 如果目标对象实现了接口，可以强制使用CGLIB实现AOP
         - 如果目标对象没有实现了接口，必须采用CGLIB库，Spring会自动在JDK动态代理和CGLIB之间转换。
-15. 为什么CGlib方式可以对接口实现代理。
+13. 为什么CGlib方式可以对接口实现代理。
     - 对接口进行代理的cglib，最后生成的源码是实现了该接口和Factory接口
     - 对实现类进行代理的cglib，最后生成的源码是继承了实现类并实现了Factory接口
-16. final的用途。
+14. final的用途。
     - 当final修饰变量时，被修饰的变量必须被初始化(赋值)，且后续不能修改其值，实质上是常量；
     - 当final修饰方法时，被修饰的方法无法被所在类的子类重写（覆写）；
     - 当final修饰类时，被修饰的类不能被继承，并且final类中的所有成员方法都会被隐式地指定为final方法，但成员变量则不会变
-17. 写出三种单例模式实现 。
+15. 写出三种单例模式实现 。
     ```
         //懒汉式
         public class Singleton{
@@ -183,27 +183,25 @@ String s=new String("xyz")究竟创建String Object分为两种情况
         //双重校验锁，线程安全，推荐使用
 
     ```
-18. 如何在父类中为子类自动完成所有的hashcode和equals实现？这么做有何优劣。
-19. 请结合OO设计理念，谈谈访问修饰符public、private、protected、default在应用设计中的作用。
-20. 深拷贝和浅拷贝区别。
+16. 深拷贝和浅拷贝区别。
     - 基本数据类型：数据存放在栈中
     - 引用数据类型：数据存在堆中，栈中存放的是指针，该指针指向堆中该实体的起始地址
     - 浅拷贝：浅拷贝只复制指向某个对象的指针，而不复制对象本身，新旧对象还是共享同一块内存，实现方式：实现Cloneable类，并重写Object的clone方法，然后在方法内部调用super.clone()方法
     - 深拷贝：深拷贝会另外创造一个一模一样的对象，新对象跟原对象不共享内存，修改新对象不会改到原对象。实现方式：1.需要实现Cloneable接口并且重写clone方法，在方法内部创建一个新的对象；2.通过序列化实现深拷贝
     - 数组的Arrays.copyOf和clone()都是浅拷贝
-21. 数组和链表数据结构描述，各自的时间复杂度。
+17. 数组和链表数据结构描述，各自的时间复杂度。
     - (静态)数组从栈中分配空间, 对于程序员方便快速,但自由度小。
     - 链表从堆中分配空间, 自由度大但申请管理比较麻烦。
     - 数组利用下标定位，时间复杂度为O(1)，链表定位元素时间复杂度O(n)；
     - 数组插入或删除元素的时间复杂度O(n)，链表的时间复杂度O(1)
-22. error和exception的区别，CheckedException，RuntimeException的区别。
+18. error和exception的区别，CheckedException，RuntimeException的区别。
     - error和exception都继承了throwable接口
     - Error类一般是指与虚拟机相关的问题，如系统崩溃，虚拟机错误，内存空间不足，方法调用栈溢等。对于这类错误的导致的应用程序中断，仅靠程序本身无法恢复和预防，遇到这样的错误，建议让程序终止。
     - Exception类表示程序可以处理的异常，可以捕获且可能恢复。遇到这类异常，应该尽可能处理异常，使程序恢复运行，而不应该随意终止异常
     - 检查异常：程序编写时需要try catch住的异常
     - 运行时异常：程序运行时出现的异常
 
-23. 请列出5个运行时异常。
+19. 请列出5个运行时异常。
 
     - ClassCastException（类转换异常）
     - NullPointException
@@ -213,26 +211,33 @@ String s=new String("xyz")究竟创建String Object分为两种情况
 
     - 全局异常处理：@ControllerAdvice
     
-24. 在自己的代码中，如果创建一个java.lang.String类，这个类是否可以被类加载器加载？为什么。
-    - 
-25. 说一说你对java.lang.Object对象中hashCode和equals方法的理解。在什么场景下需要重新实现这两个方法。
-26. 在jdk1.5中，引入了泛型，泛型的存在是用来解决什么问题。
+20. 在自己的代码中，如果创建一个java.lang.String类，这个类是否可以被类加载器加载？为什么。
+    - 双亲委派模型
+        - 如果一个类加载器收到了类加载的请求，它首先不会自己尝试去加载这个类，而是把这个请求委派给父类加载器，每一个层次的类加载器都是加此，因此所有的加载请求最终到达顶层的启动类加载器，只有当父类加载器反馈自己无法完成加载请求时（指它的搜索范围没有找到所需的类），子类加载器才会尝试自己去加载
+    - 不能
+        - 因加载某个类时，优先使用父类加载器加载需要使用的类。如果我们自定义了java.lang.String这个类， 加载该自定义的String类，该自定义String类使用的加载器是AppClassLoader，根据优先使用父类加载器原理， AppClassLoader加载器的父类为ExtClassLoader，所以这时加载String使用的类加载器是ExtClassLoader， 但是类加载器ExtClassLoader在jre/lib/ext目录下没有找到String.class类。然后使用ExtClassLoader父类的加载器BootStrap， 父类加载器BootStrap在JRE/lib目录的rt.jar找到了String.class，将其加载到内存中。这就是类加载器的委托机制。
+
+21. 在jdk1.5中，引入了泛型，泛型的存在是用来解决什么问题。
     - 解决强制类型转换
-27. 有没有可能2个不相等的对象有相同的hashcode。
+22. 有没有可能2个不相等的对象有相同的hashcode。
 
     - 可能
 
-28. Java中的HashSet内部是如何工作的。
+23. Java中的HashSet内部是如何工作的。
 
     - set是无序的、唯一的，底层使用hashMap的key实现
 
-29. 什么是序列化，怎么序列化，为什么序列化，反序列化会遇到什么问题，如何解决。
+24. 什么是序列化，怎么序列化，为什么序列化，反序列化会遇到什么问题，如何解决。
 
+    - 序列化：将对象写入到IO流中
+    - 反序列化：从IO流中恢复对象
+    - 为什么要序列化：序列化机制允许将实现序列化的Java对象转换位字节序列，这些字节序列可以保存在磁盘上，或通过网络传输，以达到以后恢复成原来的对象。序列化机制使得对象可以脱离程序的运行而独立存在。
+    - 如果一个可序列化的类的成员不是基本类型，也不是String类型，那这个引用类型也必须是可序列化的；否则，会导致此类不能序列化。
+    - java序列化算法潜在的问题：如果序列化一个可变对象（对象内的内容可更改）后，更改了对象内容，再次序列化，并不会再次将此对象转换为字节序列，而只是保存序列化编号。
+    - 可选的自定义序列化：某些属性不需要序列化。使用transient关键字选择不需要序列化的字段。
 
-
----
 **JVM知识**
-```
+
 1.什么情况下会发生栈内存溢出。
 2.JVM的内存结构，Eden和Survivor比例。
 3.JVM内存为什么要分成新生代，老年代，持久代。新生代中为什么要分为Eden和Survivor。
@@ -251,9 +256,9 @@ String s=new String("xyz")究竟创建String Object分为两种情况
 16.-XX:PermSize=256m -XX:MaxPermSize=512m -
 17.XX:MaxTenuringThreshold=20XX:CMSInitiatingOccupancyFraction=80 -
 18.XX:+UseCMSInitiatingOccupancyOnly。
-```
+
 **开源框架知识**
-```
+
 1.简单讲讲tomcat结构，以及其类加载器流程，线程模型等。
 2.tomcat如何调优，涉及哪些参数 。
 3.讲讲Spring加载流程。
@@ -271,9 +276,9 @@ String s=new String("xyz")究竟创建String Object分为两种情况
 15.netty的通讯协议是什么样的。
 16.springmvc用到的注解，作用是什么，原理。
 17.springboot启动机制。
-```
+
 **操作系统**
-```
+
 1.Linux系统下你关注过哪些内核参数，说说你知道的。
 2.Linux下IO模型有几种，各自的含义是什么。
 3.epoll和poll有什么区别。
@@ -284,7 +289,7 @@ String s=new String("xyz")究竟创建String Object分为两种情况
 8.进程和线程的区别。
 9.top 命令之后有哪些内容，有什么作用。
 10.线上CPU爆高，请问你如何找到问题所在。
-```
+
 **多线程**
 
 1. 多线程的几种实现方式，什么是线程安全。
